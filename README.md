@@ -2,11 +2,11 @@
 
 ![c29oanx7d0k41](https://user-images.githubusercontent.com/44483048/197375884-bfd2b29c-6930-4ff4-9c53-18af43d03958.png)
 
-Um jogo do genêro do Cookie Clicker, onde você tem que clicar na tela para receber dinheiro para conseguir comprar melhorias que possam gerar renda automáticamente ou multiplicar a taxa obtida por click.
+A game similar to Cookie Clicker, where you have to click on the screen to receive money to be able to buy improvements that can automatically generate income or multiply the rate obtained per click.
 
-**Essa é uma versão totalmente em desenvolvimento, vai haver muitos bugs e problemas de desempenho.**
+**This is a fully development version, there will be a lot of bugs and performance issues.**
 
-* Assets utilizados do próprio Stardew Valley para agilidar a parte de desenvolvimento.
-* Jogo desenvolvido totalmente na IDLE utilizando as bibliotecas pygame, pathlib e time.
+* Assets used from Stardew Valley itself to streamline the development part.
+* Game developed entirely at IDLE using pygame, pathlib and time libraries.
   
-> Obs: Projeto desenvolvido nas aulas de Introdução à Informática para Automação
+> Note: Project developed in the Introduction to Computing for Automation classes
