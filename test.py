@@ -1,7 +1,18 @@
+#to create game in one file without python use:
+#pyinstaller --onefile --windowed test.py
+
 # #!/usr/bin/python3.4
 # Setup Python ----------------------------------------------- #
+import sys, os
+
+#External Lib
+file_path = 'lib/site-packages/'
+sys.path.append(os.path.dirname(file_path))
+
+#import modules
 import pygame, sys
 from pygame import mixer
+
 import time
 from time import sleep
 from random import randint
