@@ -1,4 +1,4 @@
-# Farm-Simulation V0.1
+# Farm-Simulation V0.2
 
 ![c29oanx7d0k41](https://user-images.githubusercontent.com/44483048/197375884-bfd2b29c-6930-4ff4-9c53-18af43d03958.png)
 
