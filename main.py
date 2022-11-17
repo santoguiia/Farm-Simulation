@@ -249,7 +249,6 @@ def game():
                 timing += 1
                 if timing > 30:
                     cooldown = True
-                    print('rola')
             tempo = int(pygame.time.get_ticks()/1000)
             Rectplace = pygame.draw.rect(window, (0, 255, 0),(560, 280, 100, 100))
             Rectplace2 = pygame.draw.rect(window, (0, 255, 0),(710, 280, 100, 100))
