@@ -1,6 +1,3 @@
-#to create game in one file without python use:
-#pyinstaller --onefile --windowed test.py
-
 # #!/usr/bin/python3.4
 # Setup Python ----------------------------------------------- #
 import sys, os
