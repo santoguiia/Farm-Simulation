@@ -2,6 +2,15 @@
 # Setup Python ----------------------------------------------- #
 import sys, os
 
+#to pyinstaller
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 #External Lib
 file_path = 'lib/site-packages/'
 sys.path.append(os.path.dirname(file_path))
@@ -15,22 +24,21 @@ from time import sleep
 from random import randint
 from pathlib import Path
 
+
 # Setup pygame/window ---------------------------------------- #
 mainClock = pygame.time.Clock()
 from pygame.locals import *
 pygame.init()
+mixer.init()
 pygame.display.set_caption('game base')
 screen = pygame.display.set_mode((500, 500),0,32)
 
 font = pygame.font.SysFont(None, 20)
     
+#define altura e largura padrão    
 altura = 1067
 largura = 600
 
-
-
-pygame.init()
-mixer.init()
 window = pygame.display.set_mode((altura, largura))
 pygame.display.set_caption("Farm Clicker")
 running = True
@@ -45,15 +53,23 @@ def draw_text(text, font, color, surface, x, y):
 
 click = False
 
+
+# Main menu configuration
 def main_menu():
     while True:
+        background = pygame.image.load(HERE / 'assets/background.png')
+        window.blit(background, (0, 0))
 
-        screen.fill((0,0,0))
         font = pygame.font.SysFont(None, 45)
-        draw_text('main menu', font, (255, 255, 255), screen, 20, 20)
+
+        rect = pygame.Surface((largura/2.5,altura), pygame.SRCALPHA, 32)
+        rect.fill((0, 0, 0, 80))
+        screen.blit(rect, (largura/19, 0))
+        draw_text('main menu', font, (0, 0, 0), screen, largura/19+35, 20)
 
         mx, my = pygame.mouse.get_pos()
 
+        #buttons and black rect
         button_1 = pygame.Rect(50, 100, 200, 50)
         button_2 = pygame.Rect(50, 200, 200, 50)
         if button_1.collidepoint((mx, my)):
@@ -81,6 +97,8 @@ def main_menu():
         pygame.display.update()
         mainClock.tick(60)
 
+
+# Game sounds and images
 def game():
     cooldown = True
     farmer = 0
@@ -102,7 +120,6 @@ def game():
                 self.ImagemCrops2 = pygame.image.load(HERE / 'assets/primavera.png')
                 self.ImagemCrops3 = pygame.image.load(HERE / 'assets/verao.png')
                 self.ImagemCrops4 = pygame.image.load(HERE / 'assets/outono.png')
-                
                 
                 self.ListaImagens = [self.ImagemCrops1, self.ImagemCrops2, self.ImagemCrops3, self.ImagemCrops4]
                 self.posImagem = 0
@@ -318,7 +335,7 @@ def game():
                 new_contador = str(contador)
                 dinheiro_interface = font.render("Dinheiro: " + new_contador, True, (0, 255,0))
                 break
-            
+                      
             #QUIT ESC
             for event in pygame.event.get():
                 if event.type == QUIT:
