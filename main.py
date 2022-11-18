@@ -1,23 +1,9 @@
 # #!/usr/bin/python3.4
-# Setup Python ----------------------------------------------- #
+# --------- Import Modules --------- # 
 
-import sys, os
-from SaveLoadManager import SaveLoadSystem
+import sys, os 
 
-#to pyinstaller
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
-
-#External Lib
-file_path = 'lib/site-packages/'
-sys.path.append(os.path.dirname(file_path))
-
-#import modules
+from SaveLoadManager import SaveLoadSystem #SaveLoad Archive
 import pygame, sys
 from pygame import mixer
 
@@ -26,9 +12,20 @@ from time import sleep
 from random import randint
 from pathlib import Path
 
+# --------- Config Pyinstaller (to launch EXE file) --------- # 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
 
-# Setup pygame/window ---------------------------------------- #
-saveloadmanager = SaveLoadSystem(".save","save_data")
+    return os.path.join(base_path, relative_path)
+
+# --------- Loading External Modules With VirtualEnv --------- # 
+file_path = 'lib/site-packages/'
+sys.path.append(os.path.dirname(file_path))
+
+# --------- SETUP PYGAME (Window) --------- # 
 mainClock = pygame.time.Clock()
 from pygame.locals import *
 pygame.init()
@@ -57,7 +54,7 @@ def draw_text(text, font, color, surface, x, y):
 click = False
 
 
-# Main menu configuration
+# --------- Game Menu --------- # 
 def main_menu():
     while True:
         background = pygame.image.load(HERE / 'assets/background.png')
@@ -110,8 +107,7 @@ def main_menu():
         pygame.display.update()
         mainClock.tick(60)
 
-
-# Game sounds and images
+# --------- Game Running --------- # 
 def game():
     cooldown = True
     farmer = 0
@@ -365,13 +361,13 @@ def game():
         pygame.display.update()
         mainClock.tick(60)
 
-def new_func():
-    return None
-
+# --------- Game Settings Menu --------- # 
 def options():
     running = True
     while running:
-        screen.fill((0,0,0))
+        #from Settings import settings_menu 
+        background_settings = pygame.image.load(HERE / 'assets/background_settings.png')
+        window.blit(background_settings, (0, 0))
 
         draw_text('options', font, (255, 255, 255), screen, 20, 20)
         for event in pygame.event.get():
@@ -385,4 +381,6 @@ def options():
         pygame.display.update()
         mainClock.tick(60)
 
+# --------- Run Game --------- # 
+saveloadmanager = SaveLoadSystem(".save","save_data")
 main_menu()
