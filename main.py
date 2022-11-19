@@ -1,3 +1,13 @@
+'''
+A game similar to Cookie Clicker, where you have 
+to click on the screen to receive money to be able
+to buy improvements that can automatically generate
+income or multiply the rate obtained per click.
+
+https://github.com/ProlRayder/Farm-Simulation
+'''
+
+
 # #!/usr/bin/python3.4
 # --------- Import Modules --------- # 
 
