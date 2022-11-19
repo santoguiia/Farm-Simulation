@@ -12,6 +12,10 @@ from time import sleep
 from random import randint
 from pathlib import Path
 
+# --------- Global Constants --------- # 
+altura = 1067
+largura = 600
+
 # --------- Config Pyinstaller (to launch EXE file) --------- # 
 def resource_path(relative_path):
     try:
@@ -35,10 +39,6 @@ screen = pygame.display.set_mode((500, 500),0,32)
 
 font = pygame.font.SysFont(None, 20)
     
-#define altura e largura padrão    
-altura = 1067
-largura = 600
-
 window = pygame.display.set_mode((altura, largura))
 pygame.display.set_caption("Farm Clicker")
 running = True
@@ -122,9 +122,12 @@ def game():
     buy2 = font.render('Woodcutter $5000', True, (0,0,0))
     running = True
     while running:
+        #SaveLoad - Load variables
         contador = saveloadmanager.Load_game_data(["money"], [[]])
         new_contador = str(contador)
         dinheiro_interface = font.render("Dinheiro: " + new_contador, True, (0, 255,0))
+
+        # Background Game Loading
         class fundo(pygame.sprite.Sprite):
             def __init__(self):
                 pygame.sprite.Sprite.__init__(self)
@@ -143,6 +146,7 @@ def game():
 
                 self.configTempo = 1
 
+            # Accountant to change seasons
             def comportamento (self, tempo):
                 if self.configTempo == tempo:
                     self.posImagem += 1
@@ -150,7 +154,7 @@ def game():
                     if self.posImagem > len(self.ListaImagens)-1:
                         self.posImagem = 0
                     
-
+            # Change Seasons
             def colocar(self, superficie):
                 self.ImagemFundo = self.ListaImagens[self.posImagem]
                 superficie.blit(self.ImagemFundo, self.rect)
@@ -169,7 +173,7 @@ def game():
                 (5000 - dinheiro_interface.get_width() // 2, 100 - dinheiro_interface.get_height() // 2))
                 window.blit(woodcutters, (750, 120))
 
-        #crops
+        # Image Crops Loading
         class crops1(pygame.sprite.Sprite):
             def __init__(self):
                 pygame.sprite.Sprite.__init__(self)
@@ -182,13 +186,13 @@ def game():
                 self.posImagem = 0
                 self.ImagemCrops = self.ListaImagens[self.posImagem]
 
-
                 self.rect = self.ImagemCrops.get_rect()
                 self.rect.centerx = largura +10
                 self.rect.centery = altura -740
 
                 self.configTempo = 10
 
+            # Accountant to change crops
             def comportamento (self, tempo):
                 if self.configTempo == tempo:
                     self.posImagem += 1
@@ -196,11 +200,12 @@ def game():
                     if self.posImagem > len(self.ListaImagens)-1:
                         self.posImagem = 0
                     
-
+            # Change Crops
             def colocar(self, superficie):
                 self.ImagemCrops = self.ListaImagens[self.posImagem]
                 superficie.blit(self.ImagemCrops, self.rect)
 
+        # Image Crops Loading 2
         class crops2(pygame.sprite.Sprite):
             def __init__(self):
                 pygame.sprite.Sprite.__init__(self)
@@ -213,13 +218,14 @@ def game():
                 self.posImagem = 0
                 self.ImagemCrops = self.ListaImagens[self.posImagem]
 
-
+                # Accountant to change crops 2
                 self.rect = self.ImagemCrops.get_rect()
                 self.rect.centerx = largura + 160
                 self.rect.centery = altura - 740
 
                 self.configTempo = 10
                 
+            # Image Crops Loading 2
             def comportamento (self, tempo):
                 if self.configTempo == tempo:
                     self.posImagem += 1
@@ -232,14 +238,14 @@ def game():
                 self.ImagemCrops = self.ListaImagens[self.posImagem]
                 superficie.blit(self.ImagemCrops, self.rect)
 
-        #Importando as imagens da primavera
+        # FUNCTION IMAGES OPERATION
         fundo = fundo()
         crop1 = crops1()
         crop2 = crops2()
         pygame.display.update()
 
                     
-        # Main Loop
+        # --------- MAIN LOOP --------- # 
         while running:
             if cooldown is False:
                 timing += 1
@@ -253,6 +259,7 @@ def game():
             dinheiro_interface = font.render("Dinheiro: " + new_contador, True, (0, 255,0))
             farmers = font.render("Farmers: " + str(farmer), True, (0, 255,0))
             woodcutters = font.render("Woodcutters: " + str(woodcutter), True, (0, 255,0))
+
             # Mouse position and button clicking.
             pos = pygame.mouse.get_pos()
             pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
@@ -263,11 +270,9 @@ def game():
             crop2.colocar(window)
             crop2.comportamento(tempo)
             pygame.display.update()
+            
             # Check if the rect collided with the mouse pos
             # and if the left mouse button was pressed.
-
-                    
-            
             if Rectplace.collidepoint(pos) and pressed1:
                 if cooldown is True:
                     contador = contador+(randint(30,50))
