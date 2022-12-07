@@ -386,9 +386,19 @@ def options():
     while running:
         #from Settings import settings_menu 
         background_settings = pygame.image.load(HERE / 'assets/background_settings.png')
-        window.blit(background_settings, (0, 0))
-        
+        window.blit(background_settings, (0, 0))   
 
+#IMPLEMENTAR BOTÃO DE DELETAR SAVE-GAME
+#
+#        mx, my = pygame.mouse.get_pos()
+#        button_delsave = pygame.image.load(HERE / 'assets/settings.png')
+#        button_delsave = pygame.transform.scale(button_delsave, (256,168))
+#        window.blit(button_delsave, (20, 140))
+#        button_3 = pygame.Rect(50, 200, 200, 50)
+#        if button_3.collidepoint((mx, my)):
+#            if click:
+#                contador = 0
+#                new_contador = 0
 
         draw_text('options', font, (255, 255, 255), screen, 20, 20)
         for event in pygame.event.get():
