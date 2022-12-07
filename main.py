@@ -22,6 +22,8 @@ from time import sleep
 from random import randint
 from pathlib import Path
 
+from sounds import *
+
 # --------- Global Constants --------- # 
 altura = 1067
 largura = 600
@@ -40,6 +42,9 @@ file_path = 'lib/site-packages/'
 sys.path.append(os.path.dirname(file_path))
 
 # --------- SETUP PYGAME (Window) --------- # 
+
+HERE = Path(__file__).parent #PATH do jogo
+
 mainClock = pygame.time.Clock()
 from pygame.locals import *
 pygame.init()
@@ -53,13 +58,15 @@ window = pygame.display.set_mode((altura, largura))
 pygame.display.set_caption("Farm Clicker")
 running = True
 
-HERE = Path(__file__).parent #PATH do jogo
+#MUSIC MENU -> sounds.py
+Efeito_sonoro.theme_1()
 
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
     textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
+
 
 click = False
 
@@ -69,7 +76,6 @@ def main_menu():
     while True:
         background = pygame.image.load(HERE / 'assets/background.png')
         window.blit(background, (0, 0))
-
         font = pygame.font.SysFont(None, 45)
 
         rect = pygame.Surface((largura/2.5,altura), pygame.SRCALPHA, 32)
@@ -132,6 +138,8 @@ def game():
     buy2 = font.render('Woodcutter $5000', True, (0,0,0))
     running = True
     while running:
+        #Stop music
+        mixer.music.stop()
         #SaveLoad - Load variables
         contador = saveloadmanager.Load_game_data(["money"], [[]])
         new_contador = str(contador)
@@ -288,8 +296,7 @@ def game():
                     contador = contador+(randint(30,50))
                     new_contador = str(contador)
                     dinheiro_interface = font.render("Dinheiro: " + new_contador, True, (0, 255,0))
-                    pygame.mixer.music.load(HERE / 'sons/click.ogg')
-                    mixer.music.play()
+                    Efeito_sonoro.click_1()
                     print("Dinheiro:",contador)
                     cooldown = False
                     timing = 0
@@ -312,8 +319,7 @@ def game():
                     contador = contador+(randint(150,350))
                     new_contador = str(contador)
                     dinheiro_interface = font.render("Dinheiro: " + new_contador, True, (0, 255,0))
-                    pygame.mixer.music.load(HERE / 'sons/click.ogg')
-                    mixer.music.play()
+                    Efeito_sonoro.click_1()
                     print("Dinheiro:",contador)
                     cooldown = False
                     timing = -60
@@ -336,8 +342,7 @@ def game():
                     new_contador = str(contador)
                     dinheiro_interface = font.render("Dinheiro: " + new_contador, True, (0, 255,0))
                     farmer += 1
-                    pygame.mixer.music.load(HERE / 'sons/click.ogg')
-                    mixer.music.play()
+                    Efeito_sonoro.click_1()
                     farmers = font.render("Farmers: " + str(farmer), True, (0, 255,0))
 
             if Rectplace4.collidepoint(pos) and pressed1:
@@ -346,8 +351,7 @@ def game():
                     new_contador = str(contador)
                     dinheiro_interface = font.render("Dinheiro: " + new_contador, True, (0, 255,0))
                     woodcutter += 1
-                    pygame.mixer.music.load(HERE / 'sons/click.ogg')
-                    mixer.music.play()
+                    Efeito_sonoro.click_1()
                     woodcutters = font.render("Woodcutters: " + str(farmer), True, (0, 255,0))
 
             while farmer > 0:
@@ -383,6 +387,8 @@ def options():
         #from Settings import settings_menu 
         background_settings = pygame.image.load(HERE / 'assets/background_settings.png')
         window.blit(background_settings, (0, 0))
+        
+
 
         draw_text('options', font, (255, 255, 255), screen, 20, 20)
         for event in pygame.event.get():
