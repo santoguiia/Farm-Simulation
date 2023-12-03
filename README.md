@@ -27,7 +27,7 @@ O jogo foi desenvolvido inteiramente no IDLE, utilizando as seguintes biblioteca
 1. Clone o repositório para o seu sistema local.
 
    ```bash
-   git clone https://github.com/santoguiia/Farm-Simulation/.git
+   git clone https://github.com/santoguiia/Farm-Simulation.git
    ```
 
 2. Certifique-se de ter o Python e o IDLE instalados em seu sistema.
@@ -35,8 +35,8 @@ O jogo foi desenvolvido inteiramente no IDLE, utilizando as seguintes biblioteca
 3. Execute o jogo utilizando o IDLE.
 
    ```bash
-   cd cookie-clicker-clone
-   python programa.py
+   cd Farm-Simulation
+   python main.py
    ```
 
 ## Contribuição
